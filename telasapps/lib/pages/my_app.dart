@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telasapps/pages/login_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        //textTheme: GoogleFonts.pacificoTextTheme(),
+        textTheme: GoogleFonts.robotoTextTheme(),
       ),
       home: const LoginPage(),
     );

@@ -14,9 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Meu App - GTI"
-            //style: GoogleFonts.aladin(),
-            ),
+        title: const Text("Meu App - GTI"),
       ),
       body: Center(child: Text(numeroGerado.toString())),
       floatingActionButton: FloatingActionButton(
