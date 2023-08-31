@@ -8,6 +8,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var emailController = TextEditingController();
+  var senhaController = TextEditingController();
+
+  //String email = "";
+  //String senha = "";
+  bool isObscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
                 Expanded(
                   flex: 8,
                   child: Image.network(
-                    //"https://hermes.digitalinnovation.one/assets/diome/logo.png",
-                    "https://www.sescdf.com.br/SiteAssets/marca-sesc-df1/Nova_marca_Sesc_horizontal_CMYK_negativa-01.png",
+                    "https://hermes.digitalinnovation.one/assets/diome/logo.png",
+                    //"https://www.sescdf.com.br/SiteAssets/marca-sesc-df1/Nova_marca_Sesc_horizontal_CMYK_negativa-01.png",
                   ),
                 ),
                 Expanded(child: Container()),
@@ -58,8 +65,12 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.symmetric(horizontal: 30),
               height: 30,
               alignment: Alignment.center,
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                controller: emailController,
+                onChanged: (value) {
+                  debugPrint(value);
+                },
+                decoration: const InputDecoration(
                     contentPadding: EdgeInsets.only(top: 0),
                     hintText: "E-mail",
                     hintStyle: TextStyle(color: Colors.black),
@@ -74,13 +85,31 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 height: 30,
                 alignment: Alignment.center,
-                child: const TextField(
+                child: TextField(
+                  //esconde a senha
+
+                  obscureText: isObscureText,
+                  controller: senhaController,
+                  onChanged: (value) {
+                    debugPrint(value);
+                  },
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 0),
+                      contentPadding: const EdgeInsets.only(top: 0),
                       hintText: "Senha",
-                      hintStyle: TextStyle(color: Colors.black),
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: Icon(Icons.visibility)),
+                      hintStyle: const TextStyle(color: Colors.black),
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: InkWell(
+                        //efeito de visibilidade da senha
+
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(isObscureText
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                      )),
                 )),
             const SizedBox(
               height: 30,
@@ -93,7 +122,10 @@ class _LoginPageState extends State<LoginPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    debugPrint(emailController.text);
+                    debugPrint(senhaController.text);
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
