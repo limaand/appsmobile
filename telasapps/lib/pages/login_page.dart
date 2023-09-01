@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telasapps/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,8 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var emailController = TextEditingController();
-  var senhaController = TextEditingController();
+  var emailController = TextEditingController(text: "");
+  var senhaController = TextEditingController(text: "");
 
   //String email = "";
   //String senha = "";
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                   flex: 8,
                   child: Image.network(
                     "https://hermes.digitalinnovation.one/assets/diome/logo.png",
-                    //"https://www.sescdf.com.br/SiteAssets/marca-sesc-df1/Nova_marca_Sesc_horizontal_CMYK_negativa-01.png",
+                    //"https://www.sescdf.com.br/SiteAssets/marca-sesc-df1/Nova_marca_Sesc_horizontal_CMYK_negativa-01.png"
                   ),
                 ),
                 Expanded(child: Container()),
@@ -67,9 +68,6 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.center,
               child: TextField(
                 controller: emailController,
-                onChanged: (value) {
-                  debugPrint(value);
-                },
                 decoration: const InputDecoration(
                     contentPadding: EdgeInsets.only(top: 0),
                     hintText: "E-mail",
@@ -90,9 +88,6 @@ class _LoginPageState extends State<LoginPage> {
 
                   obscureText: isObscureText,
                   controller: senhaController,
-                  onChanged: (value) {
-                    debugPrint(value);
-                  },
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.only(top: 0),
                       hintText: "Senha",
@@ -123,8 +118,16 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    debugPrint(emailController.text);
-                    debugPrint(senhaController.text);
+                    if (emailController.text.trim() == "email@email.com" &&
+                        senhaController.text.trim() == "123") {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Erro ao efetuar o login!")));
+                    }
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
